@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">📖</span> Book&nbsp;Tracker</div>
+    <nav class="nav">
+      <button class="nav-item active" data-view="dashboard"><span class="ico">▦</span> Dashboard</button>
+      <button class="nav-item" data-view="library"><span class="ico">▤</span> Library</button>
+      <button class="nav-item" data-view="stats"><span class="ico">◔</span> Statistics</button>
+    </nav>
+    <button id="addBtn" class="btn btn-primary add-cta">+ &nbsp;Add a book</button>
+    <div class="side-foot" id="sideFoot"></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="viewTitle">Dashboard</h1>
+        <p class="sub" id="viewSub">A snapshot of your reading life</p>
+      </div>
+    </header>
+
+    <section id="view-dashboard" class="view"></section>
+    <section id="view-library" class="view hidden"></section>
+    <section id="view-stats" class="view hidden"></section>
+  </main>
+
+  <!-- Edit drawer -->
+  <div id="scrim" class="scrim hidden"></div>
+  <aside id="drawer" class="drawer hidden"></aside>
+
+  <!-- Add modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head"><h3>Add a book</h3><button class="icon-btn" id="modalClose">✕</button></div>
+      <form id="addForm" class="form">
+        <label>Title <span class="req">*</span><input name="title" required placeholder="Book title"></label>
+        <label>Author <span class="req">*</span><input name="author" required placeholder="Author name"></label>
+        <div class="grid-2">
+          <label>Series<input name="series" placeholder="Optional"></label>
+          <label>Book #<input name="book_number" placeholder="e.g. 1"></label>
+        </div>
+        <div class="grid-2">
+          <label>Format
+            <select name="format">
+              <option>Kindle</option><option>Physical</option><option>PDF</option>
+              <option>Audio</option><option>Other</option>
+            </select>
+          </label>
+          <label class="check-wrap">Status
+            <span class="check"><input type="checkbox" name="read"> Already read</span>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="modalCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add to library</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
